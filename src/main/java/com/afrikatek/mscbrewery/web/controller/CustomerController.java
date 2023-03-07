@@ -3,6 +3,7 @@ package com.afrikatek.mscbrewery.web.controller;
 import com.afrikatek.mscbrewery.services.CustomerService;
 import com.afrikatek.mscbrewery.web.model.BeerDTO;
 import com.afrikatek.mscbrewery.web.model.CustomerDTO;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,15 +29,15 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody CustomerDTO customerDTO){
-        BeerDTO savedBeerDTO = customerService.createCustomer(customerDTO);
+    public ResponseEntity handlePost(@Valid @RequestBody CustomerDTO customerDTO){
+        CustomerDTO savedCustomerDTO = customerService.createCustomer(customerDTO);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", "/api/v1/customer/" + savedBeerDTO.getId());
+        headers.add("Location", "/api/v1/customer/" + savedCustomerDTO.getId());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
     @PutMapping("/{customerId}")
-    public ResponseEntity handleUpdate(@PathVariable UUID customerId, @RequestBody CustomerDTO customerDTO){
+    public ResponseEntity handleUpdate(@Valid @PathVariable UUID customerId, @RequestBody CustomerDTO customerDTO){
         customerService.updateCustomer(customerId, customerDTO);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -46,4 +47,6 @@ public class CustomerController {
     public void handleDelete(@PathVariable UUID customerId){
         customerService.deleteCustomerById(customerId);
     }
+
+
 }

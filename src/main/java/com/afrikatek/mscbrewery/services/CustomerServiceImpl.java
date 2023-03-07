@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public BeerDTO createCustomer(CustomerDTO customerDTO) {
-        return null;
+    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+        return CustomerDTO.builder().id(UUID.randomUUID()).build();
     }
 }
