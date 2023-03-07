@@ -1,4 +1,4 @@
-package com.afrikatek.mscbrewery.web.model;
+package com.afrikatek.mscbrewery.domain;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
@@ -8,27 +8,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
  * project msc-brewery
  * created by murukai
- * created on 2023/02/08 at 05:37:04
+ * created on 2023/03/07 at 18:32:42
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDTO {
-    @Null
+public class Beer {
     private UUID id;
-    @NotBlank
     private String beerName;
-    @NotBlank
     private String beerStyle;
-    @Positive
     private Long upc;
-    private OffsetDateTime createdDate;
-    private OffsetDateTime lastUpdatedDate;
+    private Timestamp createdDate;
+    private Timestamp lastUpdatedDate;
+
 }
